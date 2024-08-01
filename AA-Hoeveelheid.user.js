@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         AA Soortelijk Gewicht
+// @name         AA-Hoeveelheid
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Melding Soortelijk Gewicht
+// @description  Melding soortelijke gewichten
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
 // @grant        none
@@ -67,12 +67,12 @@
     }
 
     function addButton(ele) {
-        if (document.querySelector('#buttonWrapper')) {
+        if (document.querySelector('#hoeveelheidbuttonWrapper')) {
             return;
         }
 
         let wrapper = document.createElement('div');
-        wrapper.id = 'buttonWrapper';
+        wrapper.id = 'hoeveelheidButtonWrapper';
         wrapper.style.marginTop = '10px';
         wrapper.style.marginBottom = '10px';
 
