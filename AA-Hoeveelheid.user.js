@@ -67,7 +67,7 @@
     }
 
     function addButton(ele) {
-        if (document.querySelector('#hoeveelheidbuttonWrapper')) {
+        if (document.querySelector('#hoeveelheidButtonWrapper')) {
             return;
         }
 
