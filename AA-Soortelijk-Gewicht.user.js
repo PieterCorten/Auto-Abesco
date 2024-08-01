@@ -6,8 +6,8 @@
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
 // @grant        none
-// @updateURL    https://your-update-url.com/your-script.user.js
-// @downloadURL  https://
+// @updateURL    https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Soortelijk-Gewicht.user.js
+// @downloadURL  https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Soortelijk-Gewicht.user.js
 // ==/UserScript==
 
 (function () {
