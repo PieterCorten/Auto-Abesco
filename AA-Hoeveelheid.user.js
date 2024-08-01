@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Hoeveelheid
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Melding soortelijke gewichten
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
