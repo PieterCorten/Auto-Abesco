@@ -7,6 +7,7 @@
 // @match        https://asbestinventaris-oefen.ovam.be/*
 // @grant        none
 // @updateURL    https://your-update-url.com/your-script.user.js
+// @downloadURL  https://
 // ==/UserScript==
 
 (function () {
