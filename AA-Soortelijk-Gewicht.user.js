@@ -14,14 +14,14 @@
     'use strict';
 
     function soortelijkGewicht() {
-        let existingBox = document.getElementById('soortelijkGewichtBox');
+        let existingBox = document.getElementById('sgBox');
         if (existingBox) {
             existingBox.remove();
             return;
         }
 
         let container = document.createElement('div');
-        container.id = 'soortelijkGewichtBox';
+        container.id = 'sgBox';
         container.style.position = 'fixed';
         container.style.top = '10px';
         container.style.right = '10px';
@@ -67,17 +67,16 @@
     }
 
     function addButton(ele) {
-        if (document.querySelector('#autoAbescoButtonWrapper')) {
+        if (document.querySelector('#buttonWrapper')) {
             return;
         }
 
         let wrapper = document.createElement('div');
-        wrapper.id = 'autoAbescoButtonWrapper';
+        wrapper.id = 'buttonWrapper';
         wrapper.style.marginTop = '10px';
         wrapper.style.marginBottom = '10px';
 
         let button = document.createElement('button');
-        button.id = 'autoAbescoButtonSoortelijkGewicht';
         button.innerText = 'Auto Abesco';
         button.style.backgroundColor = 'rgba(59, 97, 119, 1)';
         button.style.color = 'white';
