@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA Soortelijk Gewicht
 // @namespace    http://tampermonkey.net/
-// @version      1.9
+// @version      1.0
 // @description  Melding Soortelijk Gewicht
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -19,7 +19,7 @@
             existingBox.remove();
             return;
         }
-// weg tekst
+
         let container = document.createElement('div');
         container.id = 'soortelijkGewichtBox';
         container.style.position = 'fixed';
