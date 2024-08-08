@@ -12,26 +12,6 @@
 (function ($) {
     'use strict';
 
-    const configUrl = 'https://raw.githubusercontent.com/PieterCorten/Auto-Abesco/main/config.txt';
-
-    // Function to check the remote configuration
-    function checkConfigAndRun() {
-        $.get(configUrl)
-            .done(data => {
-            if ($.trim(data) === 'enabled') {
-                runScript();
-            } else {
-                console.log('Script is disabled by remote configuration');
-            }
-        })
-            .fail(() => {
-            console.log('Failed to fetch configuration, defaulting to disabled');
-        });
-    }
-
-    checkConfigAndRun();
-
-    // Main script functionality
     function runScript() {
         function soortelijkGewicht() {
             if ($('#soortelijkGewichtBox').length) {
@@ -151,5 +131,7 @@
 
         init();
     }
+
+    runScript();
 
 })(jQuery);
