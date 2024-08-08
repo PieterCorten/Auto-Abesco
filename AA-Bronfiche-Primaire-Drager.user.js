@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Primaire-Drager
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      2.0
 // @description  Vaak voorkomende toepassingen en speciale gevallen
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -12,6 +12,26 @@
 (function ($) {
     'use strict';
 
+    const configUrl = 'https://raw.githubusercontent.com/PieterCorten/Auto-Abesco/main/config.txt';
+
+    // Function to check the remote configuration
+    function checkConfigAndRun() {
+        $.get(configUrl)
+            .done(data => {
+            if ($.trim(data) === 'enabled') {
+                runScript();
+            } else {
+                console.log('Script is disabled by remote configuration');
+            }
+        })
+            .fail(() => {
+            console.log('Failed to fetch configuration, defaulting to disabled');
+        });
+    }
+
+    checkConfigAndRun();
+
+    // Main script functionality
     function runScript() {
         const options1 = [
             'Anti-dreun folie',
@@ -432,6 +452,5 @@
         console.log('OptionTwo function executed');
     }
 
-    runScript();
-
 })(jQuery);
+
