@@ -12,26 +12,6 @@
 (function ($) {
     'use strict';
 
-    const configUrl = 'https://raw.githubusercontent.com/PieterCorten/Auto-Abesco/main/config.txt';
-
-    // Function to check the remote configuration
-    function checkConfigAndRun() {
-        $.get(configUrl)
-            .done(function (data) {
-            if ($.trim(data) === 'enabled') {
-                runScript();
-            } else {
-                console.log('Script is disabled by remote configuration');
-            }
-        })
-            .fail(function () {
-            console.log('Failed to fetch configuration, defaulting to disabled');
-        });
-    }
-
-    checkConfigAndRun();
-
-    // Main script functionality
     function runScript() {
         function notitieAV() {
             const textToCopy = "De toepassing is asbestVERDACHT. Aanvullend onderzoek is nodig om het asbesthoudend karakter van de toepassing te bepalen.";
@@ -110,6 +90,8 @@
         // Run init initially in case the content is already present
         init();
     }
+
+    runScript();
 
 })(jQuery);
 
