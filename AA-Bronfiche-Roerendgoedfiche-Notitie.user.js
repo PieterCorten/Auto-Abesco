@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Roerendgoedfiche-Notitie
 // @namespace    http://tampermonkey.net/
-// @version      1.9
+// @version      2.0
 // @description  Notitie asbestVERDACHT
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -12,6 +12,26 @@
 (function ($) {
     'use strict';
 
+    const configUrl = 'https://raw.githubusercontent.com/PieterCorten/Auto-Abesco/main/config.txt';
+
+    // Function to check the remote configuration
+    function checkConfigAndRun() {
+        $.get(configUrl)
+            .done(data => {
+            if ($.trim(data) === 'enabled') {
+                runScript();
+            } else {
+                console.log('Script is disabled by remote configuration');
+            }
+        })
+            .fail(() => {
+            console.log('Failed to fetch configuration, defaulting to disabled');
+        });
+    }
+
+    checkConfigAndRun();
+
+    // Main script functionality
     function runScript() {
         function notitieAV() {
             const textToCopy = "De toepassing is asbestVERDACHT. Aanvullend onderzoek is nodig om het asbesthoudend karakter van de toepassing te bepalen.";
@@ -91,8 +111,4 @@
         init();
     }
 
-    runScript();
-
 })(jQuery);
-
-
