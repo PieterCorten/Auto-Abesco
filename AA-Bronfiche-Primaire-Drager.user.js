@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         AA-Bronfiche-Primaire drager
+// @name         AA-Bronfiche-Primaire-Drager
 // @namespace    http://tampermonkey.net/
 // @version      1.3
 // @description  Melding vaak voorkomende toepassingen
