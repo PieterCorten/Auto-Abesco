@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Afvalfiche-Hoeveelheid
 // @namespace    http://tampermonkey.net/
-// @version      1.9
+// @version      2.0
 // @description  Soortelijke gewichten
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -9,9 +9,32 @@
 // @require      https://code.jquery.com/jquery-3.7.1.js
 // ==/UserScript==
 
+
+
+
 (function ($) {
     'use strict';
 
+    const configUrl = 'https://raw.githubusercontent.com/PieterCorten/Auto-Abesco/main/config.txt';
+
+    // Function to check the remote configuration
+    function checkConfigAndRun() {
+        $.get(configUrl)
+            .done(data => {
+            if ($.trim(data) === 'enabled') {
+                runScript();
+            } else {
+                console.log('Script is disabled by remote configuration');
+            }
+        })
+            .fail(() => {
+            console.log('Failed to fetch configuration, defaulting to disabled');
+        });
+    }
+
+    checkConfigAndRun();
+
+    // Main script functionality
     function runScript() {
         function soortelijkGewicht() {
             if ($('#soortelijkGewichtBox').length) {
@@ -131,7 +154,5 @@
 
         init();
     }
-
-    runScript();
 
 })(jQuery);
