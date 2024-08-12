@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Roerendgoedfiche-Notitie
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      3.0
 // @description  Notitie asbestVERDACHT
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
+// @match        https://asbestinventaris.ovam.be/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.7.1.min.js
 // ==/UserScript==
@@ -34,7 +35,7 @@
     // Main script functionality
     function runScript() {
         function notitieAV() {
-            const textToCopy = "De toepassing is asbestVERDACHT. Aanvullend onderzoek is nodig om het asbesthoudend karakter van de toepassing te bepalen.";
+            const textToCopy = "De toepassing is asbestVERDACHT. Aanvullend onderzoek is vereist om vast te stellen of de toepassing al dan niet asbesthoudend is.";
 
             var notitieElement = document.getElementById('notitie');
 
@@ -93,7 +94,6 @@
                 addButton($notitieElement);
             }
         }
-
 
         // Create a MutationObserver to monitor changes in the DOM so the button keeps showing in case of tab change
         const observer = new MutationObserver((mutationsList) => {
