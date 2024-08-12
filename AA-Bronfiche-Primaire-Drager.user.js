@@ -1,10 +1,11 @@
 // ==UserScript==
-// @name         AA-Bronfiche-Primaire-Drager
+// @name         AA-Bronfiche-Primaire-drager
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      3.0
 // @description  Vaak voorkomende toepassingen en speciale gevallen
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
+// @match        https://asbestinventaris.ovam.be/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.7.1.js
 // ==/UserScript==
@@ -306,7 +307,6 @@
         if (inputElement) {
             inputElement.focus();
             document.execCommand('insertText', false, value);
-            inputElement.dispatchEvent(new Event('change', { bubbles: true }));
             triggerKeyboardEvents(inputElement);
         } else {
             console.error('Input element not found');
@@ -322,6 +322,7 @@
                 which: 40,
                 bubbles: true
             }));
+
             setTimeout(function() {
                 inputElement.dispatchEvent(new KeyboardEvent('keydown', {
                     key: 'Enter',
@@ -330,8 +331,8 @@
                     which: 13,
                     bubbles: true
                 }));
-            }, 100);
-        }, 100);
+            }, 100); // Delay for pressing Enter
+        }, 100); // Delay for pressing ArrowDown
     }
 
     function insertTextToElement(elementId, text, delay = 0) {
@@ -346,12 +347,12 @@
         }, delay);
     }
 
-    // Main Functions
+    // Function implementations
     function antidreunFolieFunction() {
         setDropdownValue('primaireDrager', 'SANITAIRE_INFRASTRUCTUUR');
         setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'ANDERE');
         setInputValue(inputSelector, 'Bitumen');
-        insertTextToElement('asbestToepassingGegevens.andereLabel', 'Anti-dreun folie', 750);
+        insertTextToElement('asbestToepassingGegevens.andereLabel', 'Anti-dreun folie', 500);
     }
 
     function golfplaatFunction() {
