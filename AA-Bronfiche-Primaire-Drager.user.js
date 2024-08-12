@@ -387,7 +387,7 @@
 
     function mastiekFunction() {
         setDropdownValue('primaireDrager', 'WANDOPENING_VERTICAAL');
-        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'PASTA-STOPVERF-VOEGSEL-STOPSEL');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'PASTA_STOPVERF_VOEGSEL_STOPSEL');
         setInputValue(inputSelector, 'Kitten, mastiek, pasta');
     }
 
