@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Afvalfiche-Hoeveelheid
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      3.0
 // @description  Soortelijke gewichten
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
+// @match        https://asbestinventaris.ovam.be/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.7.1.js
 // ==/UserScript==
