@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Beperkingsfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.1
 // @description  Beperkingsfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -37,6 +37,7 @@
         const options = [
             'Kruipkelder',
             'Onderdak',
+            'Putje ongeopend',
             'Roofing',
             'Sediment in dakgoot',
         ];
@@ -214,6 +215,9 @@
             case 'Onderdak':
                 onderdakFunction();
                 break;
+            case 'Putje ongeopend':
+                putjeOngeopendFunction();
+                break;
             case 'Roofing':
                 roofingFunction();
                 break;
@@ -257,7 +261,7 @@
         }
     }
 
-    // Function to handle Kruipkelder option
+    // Function implementations
     function kruipkelderFunction() {
         clickLabel('beperkingstype-PERMANENT');
         selectDropdownValue('beperkingsreden', 'TEGEN_WELZIJNSWET');
@@ -266,7 +270,6 @@
         insertText('motivatie', textToCopy);
     }
 
-    // Function to handle Onderdak option
     function onderdakFunction() {
         clickLabel('beperkingstype-TIJDELIJK');
         selectDropdownValue('beperkingsreden', 'ONVEILIGE_HOOGTE');
@@ -278,7 +281,17 @@
         selectDropdownValue('asbestToepassingGegevens.asbestToepassing', 'TYPE_MENUISERITE');
     }
 
-    // Function to handle Roofing option
+    function putjeOngeopendFunction() {
+        clickLabel('beperkingstype-TIJDELIJK');
+        selectDropdownValue('beperkingsreden', 'RISICOBEOORDELING_ONMOGELIJK');
+
+        const textToCopy = "Het deksel van het putje kon niet worden geopend, waardoor niet kon worden vastgesteld of er asbestverdachte leidingen aanwezig zijn.";
+        insertText('motivatie', textToCopy);
+
+        selectDropdownValue('primaireDrager', 'SANITAIRE_INFRASTRUCTUUR');
+        selectDropdownValue('asbestToepassingGegevens.asbestToepassing', 'BUIS_KOKER_LEIDING_PIJP_DOORVOER');
+    }
+
     function roofingFunction() {
         clickLabel('beperkingstype-TIJDELIJK');
         selectDropdownValue('beperkingsreden', 'ONVEILIGE_HOOGTE');
@@ -290,7 +303,6 @@
         selectDropdownValue('asbestToepassingGegevens.asbestToepassing', 'ROOFING');
     }
 
-    // Function to handle Sediment in dakgoot option
     function sedimentInDakgootFunction() {
         clickLabel('beperkingstype-TIJDELIJK');
         selectDropdownValue('beperkingsreden', 'ONVEILIGE_HOOGTE');
