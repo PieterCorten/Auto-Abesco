@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Adviesfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.1
 // @description  Adviesfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -35,13 +35,14 @@
     // Main script functionality
     function runScript() {
         const options = [
-            'Afwerkingslaag schrijnwerk N-AV',
+            'Afwerkingslaag schrijnwerk',
             'CV ketel AV',
             'CV ketel N-AV',
-            'Elektrische installatie N-AV',
+            'Elektrische installatie',
             'Gevelbekleding buren',
+            'Putjes geopend',
             'Tegellijm faiencetegels',
-            'Verwarmingstoestel AV',
+            'Verwarmingstoestel',
         ];
 
         let lastSelectedOption = null;
@@ -211,7 +212,7 @@
     // Function to execute the corresponding function for the selected option
     function executeOption(option) {
         switch (option) {
-            case 'Afwerkingslaag schrijnwerk N-AV':
+            case 'Afwerkingslaag schrijnwerk':
                 afwerkingslaagSchrijnwerkFunction();
                 break;
             case 'CV ketel AV':
@@ -220,16 +221,19 @@
             case 'CV ketel N-AV':
                 CVKetelNAVFunction();
                 break;
-            case 'Elektrische installatie N-AV':
+            case 'Elektrische installatie':
                 elektrischeInstallatieFunction();
                 break;
             case 'Gevelbekleding buren':
                 gevelbekledingBurenFunction();
                 break;
+            case 'Putjes geopend':
+                putjesGeopendFunction();
+                break;
             case 'Tegellijm faiencetegels':
                 tegellijmFaiencetegelsFunction();
                 break;
-            case 'Verwarmingstoestel AV':
+            case 'Verwarmingstoestel':
                 verwarmingstoestelFunction();
                 break;
             default:
@@ -356,6 +360,13 @@
         setTimeout(function() {
             insertText("De lijm waarmee de faiencetegels aan de wand zijn bevestigd kan mogelijk asbest bevatten. Aanvullend onderzoek is vereist om vast te stellen of de lijm al dan niet asbesthoudend is.");
         }, 500);
+    }
+
+    function putjesGeopendFunction() {
+        initElements();
+        setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_VASTSTELLING_EXPERTISE_NIET_ASBESTVERDACHT');
+        setDropdownValue(dropdownPrimaireDrager, 'SANITAIRE_INFRASTRUCTUUR');
+        insertText("Eén of meerdere putjes rondom de woning werden geopend. Er zijn geen asbestverdachte leidingen vastgesteld.");
     }
 
     function verwarmingstoestelFunction() {
