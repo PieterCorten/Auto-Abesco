@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Adviesfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.1
+// @version      3.1.1
 // @description  Adviesfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -351,6 +351,13 @@
         }, 500);
     }
 
+    function putjesGeopendFunction() {
+        initElements();
+        setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_VASTSTELLING_EXPERTISE_NIET_ASBESTVERDACHT');
+        setDropdownValue(dropdownPrimaireDrager, 'SANITAIRE_INFRASTRUCTUUR');
+        insertText("Eén of meerdere putjes op de inspectielocatie werden geopend. Er zijn geen asbestverdachte leidingen vastgesteld.");
+    }
+
     function tegellijmFaiencetegelsFunction() {
         initElements();
         setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_REDELIJK_VERMOEDEN');
@@ -360,13 +367,6 @@
         setTimeout(function() {
             insertText("De lijm waarmee de faiencetegels aan de wand zijn bevestigd kan mogelijk asbest bevatten. Aanvullend onderzoek is vereist om vast te stellen of de lijm al dan niet asbesthoudend is.");
         }, 500);
-    }
-
-    function putjesGeopendFunction() {
-        initElements();
-        setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_VASTSTELLING_EXPERTISE_NIET_ASBESTVERDACHT');
-        setDropdownValue(dropdownPrimaireDrager, 'SANITAIRE_INFRASTRUCTUUR');
-        insertText("Eén of meerdere putjes rondom de woning werden geopend. Er zijn geen asbestverdachte leidingen vastgesteld.");
     }
 
     function verwarmingstoestelFunction() {
