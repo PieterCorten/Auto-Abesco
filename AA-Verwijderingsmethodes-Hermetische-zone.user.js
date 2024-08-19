@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Verwijderingsmethodes-Hermetische-zone
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.5
 // @description  Hermetische zone
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -85,14 +85,16 @@
         }
 
         // Conditions and positioning of button
-        function init() {
-            let $labelElement = $('label[for="methodiekVerwijderingHermetischeZoneAsbestverwijderaar"]');
-            let $textareaElement = $('#methodiekVerwijderingHermetischeZoneAsbestverwijderaarMotivatie');
+function init() {
+    let $labelElement = $('label[for="methodiekVerwijderingHermetischeZoneAsbestverwijderaar"]');
+    let $textareaElement = $('#methodiekVerwijderingHermetischeZoneAsbestverwijderaarMotivatie');
 
-            if ($labelElement.length && $textareaElement.length) {
-                addButton($labelElement);
-            }
-        }
+    if ($labelElement.length && $textareaElement.length) {
+        addButton($labelElement);
+    } else {
+        $('#hermetischeZoneButtonWrapper').remove();
+    }
+}
 
         // Create a MutationObserver to monitor changes in the DOM so the button keeps showing in case of tab change
         const observer = new MutationObserver((mutationsList) => {
