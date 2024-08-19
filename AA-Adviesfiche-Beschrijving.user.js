@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Adviesfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.1.1
+// @version      3.5
 // @description  Adviesfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -195,6 +195,8 @@
 
             if ($beschrijvingLabel.length && containsText) {
                 addButton($beschrijvingLabel);
+            } else {
+                $('#adviesfichesOptionsBox').remove();
             }
         }
 
