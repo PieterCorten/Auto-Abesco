@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Verwijderingsmethodes-Eenvoudige-handelingen-DHZ
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.5
 // @description  Eenvoudige handelingen DHZ
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -134,7 +134,7 @@
                 click: function () {
                     const selectedOption = lastSelectedOption ? lastSelectedOption.text() : 'Geen';
                     if (selectedOption !== 'Geen') {
-                        $('#VVTOptionsBox').remove();
+                        $('#EHDHZOptionsBox').remove();
                         executeOption(selectedOption);
                     } else {
                         alert('Selecteer een optie voordat u doorgaat');
@@ -191,6 +191,10 @@
 
             if ($labelElement.length && $textareaElement.length) {
                 addButton($labelElement);
+            } else {
+                // Close the options container if the conditions are no longer met
+                $('#EHDHZOptionsBox').remove();
+                $('#EHDHZButtonWrapper').remove();
             }
         }
 
