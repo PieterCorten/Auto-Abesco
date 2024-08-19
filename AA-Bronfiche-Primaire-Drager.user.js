@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Primaire-drager
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.5
 // @description  Vaak voorkomende toepassingen en speciale gevallen
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -37,7 +37,8 @@
         const options1 = [
             'Anti-dreun folie',
             'Golfplaat vezelcement dak',
-            'Lei',
+            'Lei dak',
+            'Lei gevel',
             'Leidingisolatie',
             'Massal dorpel',
             'Massal venstertablet',
@@ -50,6 +51,7 @@
             'Pleisterwerk wanden',
             'Schouwbuis Rookgas',
             'Schouwhoed / ventilatiekap',
+            'Vinyl tegel',
             'Vinyl vloerzeil'
         ];
 
@@ -211,6 +213,8 @@
             if (label.length && containsText) {
                 addButton(label, 'Vaak voorkomende toepassingen', options1);
                 addButton(label, 'Speciale gevallen', options2);
+            } else {
+                $('#primaireDragerBox').remove();
             }
         }
 
@@ -234,8 +238,11 @@
             case 'Golfplaat vezelcement dak':
                 golfplaatFunction();
                 break;
-            case 'Lei':
-                leiFunction();
+            case 'Lei dak':
+                leiDakFunction();
+                break;
+            case 'Lei gevel':
+                leiGevelFunction();
                 break;
             case 'Leidingisolatie':
                 leidingisolatieFunction();
@@ -272,6 +279,9 @@
                 break;
             case 'Schouwhoed / ventilatiekap':
                 schouwhoedFunction();
+                break;
+            case 'Vinyl tegel':
+                vinylTegelFunction();
                 break;
             case 'Vinyl vloerzeil':
                 vinylVloerzeilFunction();
@@ -361,8 +371,14 @@
         setInputValue(inputSelector, 'Cement');
     }
 
-    function leiFunction() {
+    function leiDakFunction() {
         setDropdownValue('primaireDrager', 'SCHUIN_DAK');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'LEI_SHINGLE');
+        setInputValue(inputSelector, 'Cement');
+    }
+
+    function leiGevelFunction() {
+        setDropdownValue('primaireDrager', 'WAND_BUITENSCHIL');
         setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'LEI_SHINGLE');
         setInputValue(inputSelector, 'Cement');
     }
@@ -439,6 +455,12 @@
         setInputValue(inputSelector, 'Cement');
     }
 
+    function vinylTegelFunction() {
+        setDropdownValue('primaireDrager', 'VLOER');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'TEGEL');
+        setInputValue(inputSelector, 'Kunststof of -hars');
+    }
+
     function vinylVloerzeilFunction() {
         setDropdownValue('primaireDrager', 'VLOER');
         setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'VLOERZEIL');
@@ -454,4 +476,3 @@
     }
 
 })(jQuery);
-
