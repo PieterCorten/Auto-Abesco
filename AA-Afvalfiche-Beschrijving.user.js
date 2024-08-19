@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Afvalfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.5
 // @description  Afvalfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -189,6 +189,8 @@
 
             if ($beschrijvingLabel.length && containsText) {
                 addButton($beschrijvingLabel);
+            } else {
+                $('#afvalFichesOptionsBox').remove();
             }
         }
 
