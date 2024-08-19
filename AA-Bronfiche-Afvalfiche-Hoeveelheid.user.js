@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Afvalfiche-Hoeveelheid
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.5
 // @description  Soortelijke gewichten
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -9,9 +9,6 @@
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.7.1.js
 // ==/UserScript==
-
-
-
 
 (function ($) {
     'use strict';
@@ -135,13 +132,14 @@
 
         // Conditions and positioning of button
         function init() {
-
             var label = $('label:contains("Hoeveelheid")').first();
             var $h2Element = $('h2[data-cy="title"]');
             let containsText = $h2Element.text().includes("Afvalfiche") || $h2Element.text().includes("Bronfiche");
 
             if (label.length && containsText) {
                 addButton(label);
+            } else {
+                $('#soortelijkGewichtBox').remove();
             }
         }
 
