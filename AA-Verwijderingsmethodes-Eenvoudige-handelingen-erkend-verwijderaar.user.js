@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Verwijderingsmethodes-Eenvoudige-handelingen-erkend-verwijderaar
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.5
 // @description  Eenvoudige handelingen erkend verwijderaar
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -91,6 +91,9 @@
 
             if ($labelElement.length && $textareaElement.length) {
                 addButton($labelElement);
+            } else {
+                // Close the button wrapper if the conditions are no longer met
+                $('#EHEVButtonWrapper').remove();
             }
         }
 
