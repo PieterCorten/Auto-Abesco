@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Verwijderingsmethodes-Couveuzezak
 // @namespace    http://tampermonkey.net/
-// @version      3.0
+// @version      3.5
 // @description  Couveuzezakmethode
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -86,11 +86,13 @@
 
         // Conditions and positioning of button
         function init() {
-            let $labelElement = $('label[for="methodiekVerwijderingCouveusezakAsbestverwijderaar"]');
-            let $textareaElement = $('#methodiekVerwijderingCouveusezakAsbestverwijderaarMotivatie');
+            var label = $('label[for="methodiekVerwijderingCouveusezakAsbestverwijderaar"]');
+            var textareaElement = $('#methodiekVerwijderingCouveusezakAsbestverwijderaarMotivatie');
 
-            if ($labelElement.length && $textareaElement.length) {
-                addButton($labelElement);
+            if (label.length && textareaElement.length) {
+                addButton(label);
+            } else {
+                $('#couveuzezakButtonWrapper').remove();
             }
         }
 
