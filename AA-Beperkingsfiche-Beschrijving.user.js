@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Beperkingsfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.1
+// @version      3.5
 // @description  Beperkingsfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -192,6 +192,8 @@
 
             if ($beschrijvingLabel.length && containsText) {
                 addButton($beschrijvingLabel);
+            } else {
+                $('#beperkingsfichesOptionsBox').remove();
             }
         }
 
@@ -229,29 +231,39 @@
         }
     }
 
-    // Utility function to select a value from a dropdown and dispatch change event
-    function selectDropdownValue(dropdownId, value) {
-        const dropdown = document.getElementById(dropdownId);
-        if (dropdown) {
-            dropdown.value = value;
-            dropdown.dispatchEvent(new Event('change', { bubbles: true }));
-        } else {
-            console.error('Dropdown with id "' + dropdownId + '" not found');
-        }
+    // Global variables for commonly used elements
+    var dropdownBeperkingstype;
+    var dropdownBeperkingsreden;
+    var dropdownPrimaireDrager;
+    var dropdownAsbestToepassing;
+    var motivatieElement;
+
+    // Initialize global elements
+    function initElements() {
+        dropdownBeperkingstype = document.getElementById('beperkingstype');
+        dropdownBeperkingsreden = document.getElementById('beperkingsreden');
+        dropdownPrimaireDrager = document.getElementById('primaireDrager');
+        dropdownAsbestToepassing = document.getElementById('asbestToepassingGegevens.asbestToepassing');
+        motivatieElement = document.getElementById('motivatie');
     }
 
-    // Utility function to insert text into a specified element
-    function insertText(elementId, text) {
-        const element = document.getElementById(elementId);
-        if (element) {
-            element.focus();
+    // Helper function to set dropdown value and dispatch change event
+    function setDropdownValue(dropdown, value) {
+        dropdown.value = value;
+        dropdown.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    // Helper function to insert text into the motivatie element
+    function insertText(text) {
+        if (motivatieElement) {
+            motivatieElement.focus();
             document.execCommand('insertText', false, text);
         } else {
-            console.error('Element with id "' + elementId + '" not found');
+            console.error('Element with id "motivatie" not found');
         }
     }
 
-    // Utility function to click a label
+    // Helper function to click a label
     function clickLabel(labelFor) {
         const label = document.querySelector(`label[for="${labelFor}"]`);
         if (label) {
@@ -263,54 +275,45 @@
 
     // Function implementations
     function kruipkelderFunction() {
+        initElements();
         clickLabel('beperkingstype-PERMANENT');
-        selectDropdownValue('beperkingsreden', 'TEGEN_WELZIJNSWET');
-
-        const textToCopy = "De kruipkelder heeft een hoogte van minder dan 1,50 meter, wat gevaarlijke situaties kan veroorzaken door een gebrek aan zuurstof of de aanwezigheid van schadelijke stoffen. Om deze redenen werd de ruimte niet betreden. Wel werd de zichtbare ruimte van een veilige afstand geïnspecteerd, waarbij geen asbestverdachte materialen werden vastgesteld.";
-        insertText('motivatie', textToCopy);
+        setDropdownValue(dropdownBeperkingsreden, 'TEGEN_WELZIJNSWET');
+        insertText("De kruipkelder heeft een hoogte van minder dan 1,50 meter, wat gevaarlijke situaties kan veroorzaken door een gebrek aan zuurstof of de aanwezigheid van schadelijke stoffen. Om deze redenen werd de ruimte niet betreden. Wel werd de zichtbare ruimte van een veilige afstand geïnspecteerd, waarbij geen asbestverdachte materialen werden vastgesteld.");
     }
 
     function onderdakFunction() {
+        initElements();
         clickLabel('beperkingstype-TIJDELIJK');
-        selectDropdownValue('beperkingsreden', 'ONVEILIGE_HOOGTE');
-
-        const textToCopy = "Vanwege de hoogte kon geen dakpan worden opgetild voor inspectie van het onderdak. Ook was het niet mogelijk om het onderdak van binnenuit te inspecteren. Onderdaken kunnen asbesthoudende materialen bevatten.";
-        insertText('motivatie', textToCopy);
-
-        selectDropdownValue('primaireDrager', 'PLAFOND');
-        selectDropdownValue('asbestToepassingGegevens.asbestToepassing', 'TYPE_MENUISERITE');
+        setDropdownValue(dropdownBeperkingsreden, 'ONVEILIGE_HOOGTE');
+        insertText("Vanwege de hoogte kon geen dakpan worden opgetild voor inspectie van het onderdak. Ook was het niet mogelijk om het onderdak van binnenuit te inspecteren. Onderdaken kunnen asbesthoudende materialen bevatten.");
+        setDropdownValue(dropdownPrimaireDrager, 'PLAFOND');
+        setDropdownValue(dropdownAsbestToepassing, 'TYPE_MENUISERITE');
     }
 
     function putjeOngeopendFunction() {
+        initElements();
         clickLabel('beperkingstype-TIJDELIJK');
-        selectDropdownValue('beperkingsreden', 'RISICOBEOORDELING_ONMOGELIJK');
-
-        const textToCopy = "Het deksel van het putje kon niet worden geopend, waardoor niet kon worden vastgesteld of er asbestverdachte leidingen aanwezig zijn.";
-        insertText('motivatie', textToCopy);
-
-        selectDropdownValue('primaireDrager', 'SANITAIRE_INFRASTRUCTUUR');
-        selectDropdownValue('asbestToepassingGegevens.asbestToepassing', 'BUIS_KOKER_LEIDING_PIJP_DOORVOER');
+        setDropdownValue(dropdownBeperkingsreden, 'RISICOBEOORDELING_ONMOGELIJK');
+        insertText("Het deksel van het putje kon niet worden geopend, waardoor niet kon worden vastgesteld of er asbestverdachte leidingen aanwezig zijn.");
+        setDropdownValue(dropdownPrimaireDrager, 'SANITAIRE_INFRASTRUCTUUR');
+        setDropdownValue(dropdownAsbestToepassing, 'BUIS_KOKER_LEIDING_PIJP_DOORVOER');
     }
 
     function roofingFunction() {
+        initElements();
         clickLabel('beperkingstype-TIJDELIJK');
-        selectDropdownValue('beperkingsreden', 'ONVEILIGE_HOOGTE');
-
-        const textToCopy = "Vanwege de hoogte kon niet worden vastgesteld of het plat dak bedekt is met asbestverdachte roofing.";
-        insertText('motivatie', textToCopy);
-
-        selectDropdownValue('primaireDrager', 'PLAT_DAK');
-        selectDropdownValue('asbestToepassingGegevens.asbestToepassing', 'ROOFING');
+        setDropdownValue(dropdownBeperkingsreden, 'ONVEILIGE_HOOGTE');
+        insertText("Vanwege de hoogte kon niet worden vastgesteld of het plat dak bedekt is met asbestverdachte roofing.");
+        setDropdownValue(dropdownPrimaireDrager, 'PLAT_DAK');
+        setDropdownValue(dropdownAsbestToepassing, 'ROOFING');
     }
 
     function sedimentInDakgootFunction() {
+        initElements();
         clickLabel('beperkingstype-TIJDELIJK');
-        selectDropdownValue('beperkingsreden', 'ONVEILIGE_HOOGTE');
-
-        const textToCopy = "Vanwege de hoogte kon niet worden vastgesteld of er sediment in de dakgoot aanwezig is. Aangezien de dakgoot water opvangt van een asbesthoudende dakbedekking moet ervan worden uitgegaan dat sediment, indien aanwezig, gecontamineerd is met asbestvezels.";
-        insertText('motivatie', textToCopy);
-
-        selectDropdownValue('primaireDrager', 'INFRASTRUCTUUR_HEMELWATER');
+        setDropdownValue(dropdownBeperkingsreden, 'ONVEILIGE_HOOGTE');
+        insertText("Vanwege de hoogte kon niet worden vastgesteld of er sediment in de dakgoot aanwezig is. Aangezien de dakgoot water opvangt van een asbesthoudende dakbedekking moet ervan worden uitgegaan dat sediment, indien aanwezig, gecontamineerd is met asbestvezels.");
+        setDropdownValue(dropdownPrimaireDrager, 'INFRASTRUCTUUR_HEMELWATER');
     }
 
 })(jQuery);
