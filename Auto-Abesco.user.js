@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto-Abesco
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Auto Abesco Master
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -13,7 +13,6 @@
 // @require      https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Bronfiche-Afvalfiche-Hoeveelheid.user.js
 // @require      https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Bronfiche-Primaire-Drager.user.js
 // @require      https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Bronfiche-Roerendgoedfiche-Notitie.user.js
-// @require      https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Verwijderingsmethodes-Couveuzezak.user.js
 // @require      https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Verwijderingsmethodes-Eenvoudige-handelingen-DHZ.user.js
 // @require      https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Verwijderingsmethodes-Eenvoudige-handelingen-erkend-verwijderaar.user.js
 // @require      https://github.com/PieterCorten/Auto-Abesco/raw/main/AA-Verwijderingsmethodes-Hermetische-zone.user.js
