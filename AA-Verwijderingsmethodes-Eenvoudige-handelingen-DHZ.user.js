@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Verwijderingsmethodes-Eenvoudige-handelingen-DHZ
 // @namespace    http://tampermonkey.net/
-// @version      3.5
+// @version      4.0
 // @description  Eenvoudige handelingen DHZ
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -38,8 +38,6 @@
             'Hgb binnen onbeschadigd',
             'Hechtgebonden buiten',
             'Dichting, koord, remvoering',
-            'Hgb binnen beschadigd',
-            'Niet-hgb plaat of karton',
             'Contaminatie geen resten',
         ];
 
@@ -221,17 +219,9 @@
             case 'Dichting, koord, remvoering':
                 dichtingKoordRemvoeringFunction();
                 break;
-            case 'Hgb binnen beschadigd':
-                hgbBinnenBeschadigdFunction();
-                break;
-            case 'Niet-hgb plaat of karton':
-                nietHgbPlaatKartonFunction();
-                break;
             case 'Contaminatie geen resten':
                 ContaminatieGeenRestenFunction();
                 break;
-            default:
-                console.log('Onbekende optie: ' + option);
         }
     }
 
@@ -248,36 +238,22 @@
 
     // Specific functions for different texts
     function hgbBinnenOnbeschadigdFunction() {
-        const textToCopy = "Hechtgebonden binnentoepassing in onbeschadigde toestand. Verwijdering geeft geen aanleiding tot beschadiging van het materiaal mits correcte uitvoering.";
+        const textToCopy = "De volgende asbesthoudende toepassingen kunnen zelf worden verwijderd voor zover deze via eenvoudige handelingen kunnen worden weggenomen: Hechtgebonden asbest die niet beschadigd is of waarbij er geen vrije vezels zichtbaar zijn en waarbij verwijdering geen aanleiding geeft tot een wijziging van de toestand.";
         insertTextToNotitie(textToCopy);
     }
 
     function hgbBuitenFunction() {
-        const textToCopy = "Hechtgebonden buitentoepassing. Enkel zelf verwijderen indien mogelijk zonder verdere beschadiging van het materiaal.";
+        const textToCopy = "De volgende asbesthoudende toepassingen kunnen zelf worden verwijderd voor zover deze via eenvoudige handelingen kunnen worden weggenomen: Hechtgebonden asbest die beschadigd is of waarbij er vrije vezels zichtbaar zijn en die verwerkt is in een buitentoepassing waarbij geen derden aanwezig zijn, voor zover de verwijdering geen aanleiding geeft tot een wijziging van de toestand.";
         insertTextToNotitie(textToCopy);
     }
 
     function dichtingKoordRemvoeringFunction() {
-        const textToCopy = `Particuliere verwijdering toegestaan voor onderstaande toepassingen ongeacht of ze zich binnen of buiten bevinden:
-- Dichtingen of pakkingen;
-- Koorden en andere geweven materialen;
-- Remvoeringen of gelijkaardige toepassingen.
-Het is ten stelligste aangeraden de verwijdering te laten uitvoeren door werknemers met actueel opleidingsattest eenvoudige handelingen.`;
-        insertTextToNotitie(textToCopy);
-    }
-
-    function hgbBinnenBeschadigdFunction() {
-        const textToCopy = "Hechtgebonden binnentoepassing. Verwijdering enkel toegelaten voor werknemers met actueel opleidingsattest eenvoudige handelingen.";
-        insertTextToNotitie(textToCopy);
-    }
-
-    function nietHgbPlaatKartonFunction() {
-        const textToCopy = "Niet-hechtgebonden asbesthoudend plaatmateriaal of asbestkarton, eenvoudig demonteerbaar. Verwijdering geeft geen aanleiding tot beschadiging van het materiaal mits correcte uitvoering. Enkel toegelaten voor werknemers met actueel opleidingsattest eenvoudige handelingen.";
+        const textToCopy = "De volgende asbesthoudende toepassingen kunnen zelf worden verwijderd voor zover deze via eenvoudige handelingen kunnen worden weggenomen: Asbesthoudende koorden, dichtingen of pakkingen, remvoeringen en analoge materialen.";
         insertTextToNotitie(textToCopy);
     }
 
     function ContaminatieGeenRestenFunction() {
-        const textToCopy = "Asbestcontaminatie waarbij geen zichtbare asbestresten aanwezig zijn. Verwijdering enkel toegelaten voor werknemers met actueel opleidingsattest eenvoudige handelingen.";
+        const textToCopy = "De techniek van eenvoudige handelingen wordt toegepast bij de verwijdering van asbestcontaminatie van een lokaal, ruimte, gebouw of technische installatie waarbij er geen zichtbare asbestresten aanwezig zijn, voorzover het lokaal, de ruimte, het gebouw of de technische installatie gereinigd wordt met stofzuigers met een absoluutfilter (HEPA 13/14) en door middel van vochtige doeken.";
         insertTextToNotitie(textToCopy);
     }
 
