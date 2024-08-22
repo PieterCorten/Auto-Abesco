@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto-Abesco
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @description  Auto Abesco Master
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
