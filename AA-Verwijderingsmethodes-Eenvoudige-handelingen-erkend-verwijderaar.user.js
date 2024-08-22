@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Verwijderingsmethodes-Eenvoudige-handelingen-erkend-verwijderaar
 // @namespace    http://tampermonkey.net/
-// @version      3.5
+// @version      4.0
 // @description  Eenvoudige handelingen erkend verwijderaar
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -34,8 +34,8 @@
 
     // Main script functionality
     function runScript() {
-        function contaminatieZichtbareResten() {
-            const textToCopy = "Asbestcontaminatie waarbij zichtbare asbestresten aanwezig zijn.";
+        function beperkteContaminatieMetResten() {
+            const textToCopy = "Vanwege de aanwezigheid van zichtbare resten kan de verwijdering alleen worden uitgevoerd door een erkende verwijderaar. Indien in het werkplan van de erkende verwijderaar aangetoond wordt dat de risico’s niet beheersbaar zijn, kan de verwijderingsmethode worden verstrengd naar hermetische zone.";
 
             var notitieElement = document.getElementById('methodiekVerwijderingEenvoudigeHandelingAsbestverwijderaarMotivatie');
 
@@ -64,7 +64,7 @@
             });
 
             let $button = $('<div>', {
-                text: 'Contaminatie met resten',
+                text: 'Beperkte contaminatie met resten',
                 css: {
                     backgroundColor: 'rgba(59, 97, 119, 1)',
                     color: 'white',
@@ -74,7 +74,7 @@
                     cursor: 'pointer',
                     display: 'inline-block'
                 },
-                click: contaminatieZichtbareResten // Define the function for button click
+                click: beperkteContaminatieMetResten // Define the function for button click
             });
 
             $wrapper.append($button);
