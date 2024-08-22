@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Afvalfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.5
+// @version      4.0
 // @description  Afvalfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -214,8 +214,6 @@
             case 'Sediment in dakgoot':
                 sedimentInDakgootFunction();
                 break;
-            default:
-                console.log('Onbekende optie: ' + option);
         }
     }
 
@@ -348,7 +346,7 @@
         if (inputElementBesmetMateriaal) {
             inputElementBesmetMateriaal.focus();
             await delay(100);
-            document.execCommand('insertText', false, 'Organisch');
+            document.execCommand('insertText', false, 'Sediment');
 
             await delay(100);
             inputElementBesmetMateriaal.dispatchEvent(new KeyboardEvent('keydown', {
