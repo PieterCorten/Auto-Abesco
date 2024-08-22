@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Primaire-drager
 // @namespace    http://tampermonkey.net/
-// @version      3.5
+// @version      4.0
 // @description  Vaak voorkomende toepassingen en speciale gevallen
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -39,7 +39,7 @@
             'Golfplaat vezelcement dak',
             'Lei dak',
             'Lei gevel',
-            'Leidingisolatie',
+            'Leidingisolatie gips',
             'Massal dorpel',
             'Massal venstertablet',
             'Mastiek',
@@ -51,13 +51,15 @@
             'Pleisterwerk wanden',
             'Schouwbuis Rookgas',
             'Schouwhoed / ventilatiekap',
+            'Ventilatiebuis',
             'Vinyl tegel',
-            'Vinyl vloerzeil'
         ];
 
         const options2 = [
-            'OptionOne',
-            'OptionTwo'
+            'Glasal gevelbekleding',
+            'Golfplaat afboording',
+            'Menuiserite gevelbekleding',
+            'Menuiserite plafond',
         ];
 
         let lastSelectedOption = null;
@@ -244,8 +246,8 @@
             case 'Lei gevel':
                 leiGevelFunction();
                 break;
-            case 'Leidingisolatie':
-                leidingisolatieFunction();
+            case 'Leidingisolatie gips':
+                leidingisolatieGipsFunction();
                 break;
             case 'Massal dorpel':
                 massalDorpelFunction();
@@ -280,20 +282,24 @@
             case 'Schouwhoed / ventilatiekap':
                 schouwhoedFunction();
                 break;
+            case 'Ventilatiebuis':
+                ventilatiebuisFunction();
+                break;
             case 'Vinyl tegel':
                 vinylTegelFunction();
                 break;
-            case 'Vinyl vloerzeil':
-                vinylVloerzeilFunction();
+            case 'Glasal gevelbekleding':
+                glasalGevelbekledingFunction();
                 break;
-            case 'OptionOne':
-                optionOneFunction();
+            case 'Golfplaat afboording':
+                golfplaatAfboordingFunction();
                 break;
-            case 'OptionTwo':
-                optionTwoFunction();
+            case 'Menuiserite gevelbekleding':
+                menuiseriteGevelbekledingFunction();
                 break;
-            default:
-                console.log('Onbekende optie: ' + option);
+            case 'Menuiserite plafond':
+                menuiseritePlafondFunction();
+                break;
         }
     }
 
@@ -383,7 +389,7 @@
         setInputValue(inputSelector, 'Cement');
     }
 
-    function leidingisolatieFunction() {
+    function leidingisolatieGipsFunction() {
         setDropdownValue('primaireDrager', 'HVAC_INFRASTRUCTUUR');
         setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'THERMISCHE_ISOLATIE');
         setInputValue(inputSelector, 'Gips - kalk');
@@ -408,7 +414,7 @@
     }
 
     function menuiseriteFunction() {
-        setDropdownValue('primaireDrager', 'PLAFOND');
+        setDropdownValue('primaireDrager', 'SCHUIN_DAK');
         setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'TYPE_MENUISERITE');
         setInputValue(inputSelector, 'Cement');
     }
@@ -455,24 +461,44 @@
         setInputValue(inputSelector, 'Cement');
     }
 
+    function ventilatiebuisFunction() {
+        setDropdownValue('primaireDrager', 'HVAC_INFRASTRUCTUUR');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'BUIS_KOKER_LEIDING_PIJP_DOORVOER');
+        setInputValue(inputSelector, 'Cement');
+    }
+
     function vinylTegelFunction() {
         setDropdownValue('primaireDrager', 'VLOER');
         setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'TEGEL');
         setInputValue(inputSelector, 'Kunststof of -hars');
     }
 
-    function vinylVloerzeilFunction() {
-        setDropdownValue('primaireDrager', 'VLOER');
-        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'VLOERZEIL');
-        setInputValue(inputSelector, 'Karton - papier - viltachtig');
+    function glasalGevelbekledingFunction() {
+        setDropdownValue('primaireDrager', 'WAND_BUITENSCHIL');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'ANDERE');
+        setInputValue(inputSelector, 'Cement');
+        insertTextToElement('asbestToepassingGegevens.andereLabel', 'Glasal', 500);
     }
 
-    function optionOneFunction() {
-        console.log('OptionOne function executed');
+    function golfplaatAfboordingFunction() {
+        setDropdownValue('primaireDrager', 'AFBOORDING_OMHEINING');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'ANDERE');
+        setInputValue(inputSelector, 'Cement');
+        insertTextToElement('asbestToepassingGegevens.andereLabel', 'Golfplaat', 500);
     }
 
-    function optionTwoFunction() {
-        console.log('OptionTwo function executed');
+    function menuiseriteGevelbekledingFunction() {
+        setDropdownValue('primaireDrager', 'WAND_BUITENSCHIL');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'ANDERE');
+        setInputValue(inputSelector, 'Cement');
+        insertTextToElement('asbestToepassingGegevens.andereLabel', 'Menuiserite', 500);
+    }
+
+    function menuiseritePlafondFunction() {
+        setDropdownValue('primaireDrager', 'PLAFOND');
+        setDropdownValue('asbestToepassingGegevens.asbestToepassing', 'ANDERE');
+        setInputValue(inputSelector, 'Cement');
+        insertTextToElement('asbestToepassingGegevens.andereLabel', 'Menuiserite', 500);
     }
 
 })(jQuery);
