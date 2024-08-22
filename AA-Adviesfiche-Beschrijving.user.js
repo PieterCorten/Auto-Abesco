@@ -40,6 +40,7 @@
             'CV ketel N-AV',
             'Gevelbekleding buren',
             'Lijmlagen',
+            'Plat dak',
             'Verborgen materialen',
             'Verwarmingstoestel',
         ];
@@ -228,6 +229,9 @@
             case 'Lijmlagen':
                 lijmlagenFunction();
                 break;
+            case 'Plat dak':
+                platDakFunction();
+                break;
             case 'Verborgen materialen':
                 verborgenMaterialenFunction();
                 break;
@@ -343,6 +347,17 @@
         handleBindmiddelInput('Lijm');
         setTimeout(function() {
             insertText("De lijm waarmee plinten, vloer- en wandtegels zijn bevestigd, kan mogelijk asbest bevatten. Aanvullend onderzoek is vereist om hierover uitsluitsel te kunnen bieden.");
+        }, 500);
+    }
+
+        function platDakFunction() {
+        initElements();
+        setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_REDELIJK_VERMOEDEN');
+        setDropdownValue(dropdownPrimaireDrager, 'PLAT_DAK');
+        setDropdownValue(dropdownAsbestToepassing, 'ROOFING');
+        handleBindmiddelInput('Bitumen (roofing, teer, asfalt)');
+        setTimeout(function() {
+            insertText("Het is mogelijk dat er onder de afwerkingslaag van het plat dak zich nog oudere, asbestverdachte lagen bevinden.");
         }, 500);
     }
 
