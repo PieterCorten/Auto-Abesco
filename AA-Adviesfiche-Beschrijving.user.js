@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Adviesfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.5
+// @version      4.0
 // @description  Adviesfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -38,10 +38,9 @@
             'Afwerkingslaag schrijnwerk',
             'CV ketel AV',
             'CV ketel N-AV',
-            'Elektrische installatie',
             'Gevelbekleding buren',
-            'Putjes geopend',
-            'Tegellijm faiencetegels',
+            'Lijmlagen',
+            'Verborgen materialen',
             'Verwarmingstoestel',
         ];
 
@@ -223,23 +222,18 @@
             case 'CV ketel N-AV':
                 CVKetelNAVFunction();
                 break;
-            case 'Elektrische installatie':
-                elektrischeInstallatieFunction();
-                break;
             case 'Gevelbekleding buren':
                 gevelbekledingBurenFunction();
                 break;
-            case 'Putjes geopend':
-                putjesGeopendFunction();
+            case 'Lijmlagen':
+                lijmlagenFunction();
                 break;
-            case 'Tegellijm faiencetegels':
-                tegellijmFaiencetegelsFunction();
+            case 'Verborgen materialen':
+                verborgenMaterialenFunction();
                 break;
             case 'Verwarmingstoestel':
                 verwarmingstoestelFunction();
                 break;
-            default:
-                console.log('Onbekende optie: ' + option);
         }
     }
 
@@ -309,7 +303,7 @@
         initElements();
         setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_VASTSTELLING_EXPERTISE_NIET_ASBESTVERDACHT');
         setDropdownValue(dropdownPrimaireDrager, 'WANDOPENING_VERTICAAL');
-        insertText("De afwerkingslaag rond het schrijnwerk is geïnspecteerd. Er werden geen asbestverdachte mastieken vastgesteld.");
+        insertText("De zichtbare afwerkingslaag rond het schrijnwerk is geïnspecteerd en werd niet-asbestverdacht bevonden. Het is echter niet uitgesloten dat er nog oudere asbestverdachte lagen onderliggend aanwezig zijn.");
     }
 
     function CVKetelAVFunction() {
@@ -319,7 +313,7 @@
         setDropdownValue(dropdownAsbestToepassing, 'PAKKING_DICHTING');
         handleBindmiddelInput('Karton - papier - viltachtig');
         setTimeout(function() {
-            insertText("Oude CV-ketels kunnen asbesthoudende dichtingen bevatten. De database van IAD-online beschikt niet over de benodigde informatie om voor dit model uitsluitsel te geven. Voordat het toestel wordt verwijderd dient informatie bij de fabrikant te worden ingewonnen.");
+            insertText("Oude CV-ketels kunnen asbesthoudende onderdelen bevatten. De database van IAD-online beschikt niet over de nodige informatie dus is aanvullend onderzoek nodig om uitsluitsel te bieden.");
         }, 500);
     }
 
@@ -327,14 +321,7 @@
         initElements();
         setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_VASTSTELLING_EXPERTISE_NIET_ASBESTVERDACHT');
         setDropdownValue(dropdownPrimaireDrager, 'HVAC_INFRASTRUCTUUR');
-        insertText("De CV-ketel is geïnspecteerd. Op basis van onderzoek via IAD-online of vanwege het bouwjaar van de installatie is vastgesteld dat deze geen asbesthoudende materialen bevat.");
-    }
-
-    function elektrischeInstallatieFunction() {
-        initElements();
-        setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_VASTSTELLING_EXPERTISE_NIET_ASBESTVERDACHT');
-        setDropdownValue(dropdownPrimaireDrager, 'COMMUNICATIE_ELEKTRISCHE_INFRASTRUCTUUR');
-        insertText("De elektrische installatie is geïnspecteerd. Er werden geen asbestverdachte materialen vastgesteld.");
+        insertText("De CV-ketel is geïnspecteerd. Vanwege het bouwjaar van de installatie is vastgesteld dat deze geen asbesthoudende materialen bevat.");
     }
 
     function gevelbekledingBurenFunction() {
@@ -344,31 +331,25 @@
         setDropdownValue(dropdownAsbestToepassing, 'LEI_SHINGLE');
         handleBindmiddelInput('Cement');
         setTimeout(function() {
-            insertText(`De gevelleien op de wand van de buren, die grenst aan het inspectiegebied, worden als asbestverdacht beschouwd. Deze situatie kan op termijn leiden tot blootstelling aan asbestvezels, wat op verschillende manieren kan plaatsvinden:
-- Directe blootstelling: inademing van vezels die vrijkomen door verwering.
-- Afdruipzone: het aflopende water van de leien contamineert de grond waarin dit water terechtkomt.
-- Contaminatie van dakbedekking op platte daken: wanneer het aflopende water van de leien uitkomt op bijvoorbeeld de roofing van een plat dak, kan dit leiden tot contaminatie van de roofing.
-- Korstmos dat loskomt van asbestleien is vaak gecontamineerd.
-- Asbesthoudende fragmenten kunnen door verwering loskomen.`);
+            insertText("De gevelleien op de wand van de buren, die grenst aan het inspectiegebied, worden als asbestverdacht beschouwd. Deze situatie kan op termijn leiden tot blootstelling aan asbestvezels.");
         }, 500);
     }
 
-    function putjesGeopendFunction() {
-        initElements();
-        setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_VASTSTELLING_EXPERTISE_NIET_ASBESTVERDACHT');
-        setDropdownValue(dropdownPrimaireDrager, 'SANITAIRE_INFRASTRUCTUUR');
-        insertText("Eén of meerdere putjes op de inspectielocatie werden geopend. Er zijn geen asbestverdachte leidingen vastgesteld.");
-    }
-
-    function tegellijmFaiencetegelsFunction() {
+    function lijmlagenFunction() {
         initElements();
         setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_REDELIJK_VERMOEDEN');
         setDropdownValue(dropdownPrimaireDrager, 'BINNENWAND');
         setDropdownValue(dropdownAsbestToepassing, 'LIJMLAAG');
         handleBindmiddelInput('Lijm');
         setTimeout(function() {
-            insertText("De lijm waarmee de faiencetegels aan de wand zijn bevestigd kan mogelijk asbest bevatten. Aanvullend onderzoek is vereist om vast te stellen of de lijm al dan niet asbesthoudend is.");
+            insertText("De lijm waarmee plinten, vloer- en wandtegels zijn bevestigd, kan mogelijk asbest bevatten. Aanvullend onderzoek is vereist om hierover uitsluitsel te kunnen bieden.");
         }, 500);
+    }
+
+    function verborgenMaterialenFunction() {
+        initElements();
+        setDropdownValue(dropdownIdentificatiemethode, 'ADVIESFICHE_REDELIJK_VERMOEDEN');
+        insertText("Achter afwerkingslagen op wanden, plafonds en vloeren kunnen asbestverdachte materialen verborgen zijn. Aanvullend onderzoek is nodig om uitsluitsel te bieden.");
     }
 
     function verwarmingstoestelFunction() {
@@ -378,7 +359,7 @@
         setDropdownValue(dropdownAsbestToepassing, 'PAKKING_DICHTING');
         handleBindmiddelInput('Karton - papier - viltachtig');
         setTimeout(function() {
-            insertText("Oude verwarmingstoestellen kunnen asbesthoudende dichtingen bevatten. Voordat de toestellen worden verwijderd dient informatie bij de fabrikant te worden ingewonnen.");
+            insertText("Oude verwarmingstoestellen kunnen asbesthoudende toepassingen bevatten. Aanvullend onderzoek is nodig om uitsluitsel te bieden.");
         }, 500);
     }
 
