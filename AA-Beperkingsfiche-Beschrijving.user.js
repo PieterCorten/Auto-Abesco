@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Beperkingsfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      3.5
+// @version      4.0
 // @description  Beperkingsfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -39,6 +39,7 @@
             'Onderdak',
             'Putje ongeopend',
             'Roofing',
+            'Schouw',
             'Sediment in dakgoot',
         ];
 
@@ -223,11 +224,12 @@
             case 'Roofing':
                 roofingFunction();
                 break;
+            case 'Schouw':
+                schouwFunction();
+                break;
             case 'Sediment in dakgoot':
                 sedimentInDakgootFunction();
                 break;
-            default:
-                console.log('Onbekende optie: ' + option);
         }
     }
 
@@ -278,14 +280,14 @@
         initElements();
         clickLabel('beperkingstype-PERMANENT');
         setDropdownValue(dropdownBeperkingsreden, 'TEGEN_WELZIJNSWET');
-        insertText("De kruipkelder heeft een hoogte van minder dan 1,50 meter, wat gevaarlijke situaties kan veroorzaken door een gebrek aan zuurstof of de aanwezigheid van schadelijke stoffen. Om deze redenen werd de ruimte niet betreden. Wel werd de zichtbare ruimte van een veilige afstand geïnspecteerd, waarbij geen asbestverdachte materialen werden vastgesteld.");
+        insertText("De kruipkelder heeft een hoogte van minder dan 1,50 meter, wat gevaarlijke situaties kan veroorzaken door een gebrek aan zuurstof of de aanwezigheid van schadelijke stoffen. Om deze redenen werd de ruimte niet betreden. Bij sloop of renovatie moet de kelder worden geïnspecteerd, met inachtneming van passende veiligheidsmaatregelen.");
     }
 
     function onderdakFunction() {
         initElements();
         clickLabel('beperkingstype-TIJDELIJK');
         setDropdownValue(dropdownBeperkingsreden, 'ONVEILIGE_HOOGTE');
-        insertText("Vanwege de hoogte kon geen dakpan worden opgetild voor inspectie van het onderdak. Ook was het niet mogelijk om het onderdak van binnenuit te inspecteren. Onderdaken kunnen asbesthoudende materialen bevatten.");
+        insertText("Er was geen mogelijkheid om op veilige wijze een dakpan op te tillen voor inspectie van het onderdak. Ook was het niet mogelijk om het onderdak van binnenuit te inspecteren. Onderdaken kunnen bestaan uit asbesthoudende materialen.");
         setDropdownValue(dropdownPrimaireDrager, 'PLAFOND');
         setDropdownValue(dropdownAsbestToepassing, 'TYPE_MENUISERITE');
     }
@@ -294,7 +296,7 @@
         initElements();
         clickLabel('beperkingstype-TIJDELIJK');
         setDropdownValue(dropdownBeperkingsreden, 'RISICOBEOORDELING_ONMOGELIJK');
-        insertText("Het deksel van het putje kon niet worden geopend, waardoor niet kon worden vastgesteld of er asbestverdachte leidingen aanwezig zijn.");
+        insertText("Het deksel van het putje kon niet worden geopend, waardoor niet kon worden vastgesteld of er asbestverdachte toepassingen aanwezig zijn.");
         setDropdownValue(dropdownPrimaireDrager, 'SANITAIRE_INFRASTRUCTUUR');
         setDropdownValue(dropdownAsbestToepassing, 'BUIS_KOKER_LEIDING_PIJP_DOORVOER');
     }
@@ -308,12 +310,18 @@
         setDropdownValue(dropdownAsbestToepassing, 'ROOFING');
     }
 
+    function schouwFunction() {
+        initElements();
+        clickLabel('beperkingstype-TIJDELIJK');
+        setDropdownValue(dropdownBeperkingsreden, 'ONVEILIGE_HOOGTE');
+        insertText("Vanwege de hoogte kon niet worden vastgesteld wat er zich in de schouw bevindt. Evenmin konden luikjes worden geopend om de binnenkant van de schouw te inspecteren. Mogelijk zijn er asbestverdachte materialen aanwezig.");
+    }
+
     function sedimentInDakgootFunction() {
         initElements();
         clickLabel('beperkingstype-TIJDELIJK');
         setDropdownValue(dropdownBeperkingsreden, 'ONVEILIGE_HOOGTE');
         insertText("Vanwege de hoogte kon niet worden vastgesteld of er sediment in de dakgoot aanwezig is. Aangezien de dakgoot water opvangt van een asbesthoudende dakbedekking moet ervan worden uitgegaan dat sediment, indien aanwezig, gecontamineerd is met asbestvezels.");
-        setDropdownValue(dropdownPrimaireDrager, 'INFRASTRUCTUUR_HEMELWATER');
     }
 
 })(jQuery);
