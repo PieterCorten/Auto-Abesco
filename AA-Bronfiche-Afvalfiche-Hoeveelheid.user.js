@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Afvalfiche-Hoeveelheid
 // @namespace    http://tampermonkey.net/
-// @version      3.5
+// @version      4.0
 // @description  Soortelijke gewichten
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -78,14 +78,13 @@
 
             let content = $('<div>', {
                 html: `
-            <p>Anti-dreun folie: kg/m2</p>
-            <p>Chape: kg/m2 of m3</p>
-            <p>Mastiek: x kg/lm</p>
-            <p>Pakking: kg/stuk</p>
-            <p>Schouwbuis: externe lengte x 1,20</p>
-            <p>Schouwhoed: kg/s</p>
-            <p>Slib: x kg/lm</p>
-            <p>Ventilatiekap: kg/s</p>
+            <p>Anti-dreun folie: 5 kg/m2</p>
+            <p>Mastiek binnen: 0,2 kg/lm</p>
+            <p>Mastiek buiten: 0,4 kg/lm</p>
+            <p>Pakking: 0,2 kg/stuk</p>
+            <p>Schouwhoed: 5-10 kg/stuk</p>
+            <p>Slib: 1 kg/lm</p>
+            <p>Ventilatiekap: 5-10 kg/stuk</p>
         `,
                 css: {
                     fontSize: '1em',
