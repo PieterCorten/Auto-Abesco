@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto-Abesco
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Auto Abesco Master
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -22,4 +22,3 @@
 // ==/UserScript==
 
 console.log("Master script loaded, sub-scripts should be running.");
-
