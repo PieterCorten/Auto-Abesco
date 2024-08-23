@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Afvalfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      4.0
+// @version      4.1
 // @description  Afvalfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -36,7 +36,8 @@
     function runScript() {
         const options = [
             'Korstmos',
-            'Sediment in dakgoot',
+            'Enkel sediment',
+            'Sediment en korstmos',
         ];
 
         let lastSelectedOption = null;
@@ -211,8 +212,11 @@
             case 'Korstmos':
                 korstmosFunction();
                 break;
-            case 'Sediment in dakgoot':
-                sedimentInDakgootFunction();
+            case 'Enkel sediment':
+                enkelSedimentFunction();
+                break;
+            case 'Sediment en korstmos':
+                sedimentEnKorstmosFunction();
                 break;
         }
     }
@@ -299,7 +303,7 @@
         }
     }
 
-    async function sedimentInDakgootFunction() {
+    async function enkelSedimentFunction() {
         document.querySelector('label[for="omgeving-BUITEN"]').click();
 
         document.querySelector('label[for="afvalType-RESTEN"]').click();
@@ -367,6 +371,112 @@
             }));
         } else {
             console.error('Input element "resten.besmetteMaterialen" not found');
+        }
+
+        document.querySelector('label[for="resten.bronRestenAanwezig-true"]').click();
+
+        var elementToFocus = document.querySelector('textarea[data-cy="resten.bronRestenBeschrijving"]');
+        if (elementToFocus) {
+            elementToFocus.focus();
+        } else {
+            console.error('Aanwezige bron tekstveld element not found');
+        }
+    }
+
+    async function sedimentEnKorstmosFunction() {
+        document.querySelector('label[for="omgeving-BUITEN"]').click();
+
+        document.querySelector('label[for="afvalType-RESTEN"]').click();
+
+        var dropdownIdentificatiemethode = document.getElementById('identificatieMethodiek');
+        dropdownIdentificatiemethode.value = 'AFVALFICHE_VASTSTELLING_EXPERTISE';
+        dropdownIdentificatiemethode.dispatchEvent(new Event('change', { bubbles: true }));
+
+        document.querySelector('label[for="asbestKarakterisatie-ASBEST"]').click();
+
+        var dropdownPrimaireDrager = document.getElementById('primaireDrager');
+        dropdownPrimaireDrager.value = 'INFRASTRUCTUUR_HEMELWATER';
+        dropdownPrimaireDrager.dispatchEvent(new Event('change', { bubbles: true }));
+
+        var inputElementTypeResten = document.getElementById('resten.restenTypes');
+        if (inputElementTypeResten) {
+            await delay(100);
+            inputElementTypeResten.focus();
+            await delay(100);
+            document.execCommand('insertText', false, 'materiaal');
+
+            await delay(100);
+            inputElementTypeResten.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'Enter',
+                keyCode: 13,
+                code: 'Enter',
+                which: 13,
+                bubbles: true
+            }));
+
+            await delay(100);
+            inputElementTypeResten.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'Escape',
+                keyCode: 27,
+                code: 'Escape',
+                which: 27,
+                bubbles: true
+            }));
+        } else {
+            console.error('Input element "resten.restenTypes" not found');
+        }
+
+        var inputElementBesmetMateriaal = document.getElementById('resten.besmetteMaterialen');
+        if (inputElementBesmetMateriaal) {
+            inputElementBesmetMateriaal.focus();
+            await delay(100);
+            document.execCommand('insertText', false, 'Sediment');
+
+            await delay(100);
+            inputElementBesmetMateriaal.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'Enter',
+                keyCode: 13,
+                code: 'Enter',
+                which: 13,
+                bubbles: true
+            }));
+
+            await delay(100);
+            inputElementBesmetMateriaal.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'Escape',
+                keyCode: 27,
+                code: 'Escape',
+                which: 27,
+                bubbles: true
+            }));
+        } else {
+            console.error('Input element "resten.besmetteMaterialen" not found');
+        }
+
+        if (inputElementBesmetMateriaal) {
+            inputElementBesmetMateriaal.focus();
+            await delay(100);
+            document.execCommand('insertText', false, 'Organisch');
+
+            await delay(100);
+            inputElementBesmetMateriaal.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'Enter',
+                keyCode: 13,
+                code: 'Enter',
+                which: 13,
+                bubbles: true
+            }));
+
+            await delay(100);
+            inputElementBesmetMateriaal.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'Escape',
+                keyCode: 27,
+                code: 'Escape',
+                which: 27,
+                bubbles: true
+            }));
+        } else {
+            console.error('Input element "resten.besmetteMaterialenTwee" not found');
         }
 
         document.querySelector('label[for="resten.bronRestenAanwezig-true"]').click();
