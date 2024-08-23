@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Beperkingsfiche-Beschrijving
 // @namespace    http://tampermonkey.net/
-// @version      4.0
+// @version      4.1
 // @description  Beperkingsfiches
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -40,7 +40,7 @@
             'Putje ongeopend',
             'Roofing',
             'Schouw',
-            'Sediment in dakgoot',
+            'Sediment en korstmos',
         ];
 
         let lastSelectedOption = null;
@@ -227,8 +227,8 @@
             case 'Schouw':
                 schouwFunction();
                 break;
-            case 'Sediment in dakgoot':
-                sedimentInDakgootFunction();
+            case 'Sediment en korstmos':
+                sedimentEnKorstmos();
                 break;
         }
     }
@@ -317,11 +317,11 @@
         insertText("Vanwege de hoogte kon niet worden vastgesteld wat er zich in de schouw bevindt. Evenmin konden luikjes worden geopend om de binnenkant van de schouw te inspecteren. Mogelijk zijn er asbestverdachte materialen aanwezig.");
     }
 
-    function sedimentInDakgootFunction() {
+    function sedimentEnKorstmos() {
         initElements();
         clickLabel('beperkingstype-TIJDELIJK');
         setDropdownValue(dropdownBeperkingsreden, 'ONVEILIGE_HOOGTE');
-        insertText("Vanwege de hoogte kon niet worden vastgesteld of er sediment in de dakgoot aanwezig is. Aangezien de dakgoot water opvangt van een asbesthoudende dakbedekking moet ervan worden uitgegaan dat sediment, indien aanwezig, gecontamineerd is met asbestvezels.");
+        insertText("Vanwege de hoogte kon niet worden vastgesteld of er sediment en/of korstmos in de dakgoot aanwezig is. Aangezien de dakgoot water opvangt van een asbesthoudende dakbedekking, moet ervan worden uitgegaan dat het sediment of korstmos, indien aanwezig, gecontamineerd is met asbestvezels.");
     }
 
 })(jQuery);
