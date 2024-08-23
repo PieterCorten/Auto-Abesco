@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AA-Bronfiche-Afvalfiche-Hoeveelheid
 // @namespace    http://tampermonkey.net/
-// @version      4.0
+// @version      4.1
 // @description  Soortelijke gewichten
 // @author       Pieter Corten
 // @match        https://asbestinventaris-oefen.ovam.be/*
@@ -83,7 +83,7 @@
             <p>Mastiek buiten: 0,4 kg/lm</p>
             <p>Pakking: 0,2 kg/stuk</p>
             <p>Schouwhoed: 5-10 kg/stuk</p>
-            <p>Slib: 1 kg/lm</p>
+            <p>Sediment: 1 kg/lm</p>
             <p>Ventilatiekap: 5-10 kg/stuk</p>
         `,
                 css: {
