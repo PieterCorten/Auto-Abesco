@@ -4,8 +4,8 @@
 // @version      4.0
 // @description  Adviesfiches
 // @author       Pieter Corten
-// @match        https://asbestinventaris-oefen.ovam.be/*
-// @match        https://asbestinventaris.ovam.be/*
+// @match        *://asbestinventaris-oefen.ovam.be/*
+// @match        *://asbestinventaris.ovam.be/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.7.1.js
 // ==/UserScript==
